@@ -1,0 +1,33 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "A NodeJS module to handle winston loggers.",
+  "main": "index.js",
+  "scripts": {
+    "watch": "clear && nodemon index.js",
+    "start": "clear && nodejs index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SunsetRiders/logger.git"
+  },
+  "keywords": [
+    "logger",
+    "winston"
+  ],
+  "author": "Daitan Group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SunsetRiders/logger/issues"
+  },
+  "homepage": "https://github.com/SunsetRiders/logger#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express-winston": "^2.4.0",
+    "le_node": "^1.7.1",
+    "path": "^0.12.7",
+    "winston": "^2.3.1"
+  }
+}
