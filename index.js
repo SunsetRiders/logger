@@ -1,6 +1,8 @@
 const LoggerDebug = require("./lib/logger-debug");
 const LoggerError = require("./lib/logger-error");
 const LoggerRequest = require("./lib/logger-request");
+const LoggerInfo = require("./lib/logger-info");
+const LoggerWarn = require("./lib/logger-warn");
 
 class Index {
 
@@ -8,7 +10,9 @@ class Index {
     return {
         LoggerDebug,
         LoggerError,
-        LoggerRequest
+        LoggerRequest,
+        LoggerInfo,
+        LoggerWarn
     }
   }
 
