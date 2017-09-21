@@ -1,4 +1,4 @@
-const LoggerDefault = require("./lib/logger-default");
+const LoggerDebug = require("./lib/logger-debug");
 const LoggerError = require("./lib/logger-error");
 const LoggerRequest = require("./lib/logger-request");
 
@@ -6,7 +6,7 @@ class Index {
 
   constructor() {
     return {
-        LoggerDefault,
+        LoggerDebug,
         LoggerError,
         LoggerRequest
     }
