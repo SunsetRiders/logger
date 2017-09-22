@@ -118,15 +118,15 @@ req.logger('error',
 }); 
 ```
 
-**1. type**
+**1. type** REQUIRED
 
 Use one of the 4 loggers types. **(String)**
 
-**2. data**
+**2. data** REQUIRED
 
 The data you want to store in log. **(Object or String)**
 
-**3. altconfig**
+**3. altconfig** NOT REQUIRED
 
 Alternative configuration object. **(Object)**
 
