@@ -85,22 +85,22 @@ Send the log to log entries web service.
 
 ## Usage
 
-Since the middleware binds logger to req object it can be accessed with:
+Since the middleware binds logger to req object it can be executed by calling:
 
 ```javascript
 req.logger(type, data, config); // This will automatically insert/show the log
 ```
 **1. type**
 
-Use one of the 4 logger type. (String)
+Use one of the 4 logger type. **(String)**
 
 **2. data**
 
-The data you want to store in log. (Object or String)
+The data you want to store in log. **(Object or String)**
 
-**2. config**
+**3. config**
 
-Configuration object (Object)
+Configuration object. **(Object)**
 
 **IMPORTANT: If you want to log any type you must always use it from the req object described above** 
 
