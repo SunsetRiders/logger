@@ -22,7 +22,7 @@ This implementation provides 5 logger types which are.
 
 ```javascript
 const LoggerDebug = require('logger').LoggerDebug;
-const loggerDebug = new LoggerDebug().execute();
+const loggerDebug = new LoggerDebug(req, res, {}).execute();
 loggerDebug({
   ...
   msg: "Store some JSON object..."
@@ -36,7 +36,7 @@ loggerDebug({
 
 ```javascript
 const LoggerError = require('logger').LoggerError;
-const loggerError = new LoggerError().execute();
+const loggerError = new LoggerError(req, res, {}).execute();
 loggerError({
   ...
   msg: "Store some JSON object..."
@@ -50,7 +50,7 @@ loggerError({
 
 ```javascript
 const LoggerInfo = require('logger').LoggerInfo;
-const loggerInfo = new LoggerInfo().execute();
+const loggerInfo = new LoggerInfo(req, res, {}).execute();
 loggerInfo({
   ...
   msg: "Store some JSON object..."
@@ -64,7 +64,7 @@ loggerInfo({
 
 ```javascript
 const LoggerWarn = require('logger').LoggerWarn;
-const loggerWarn = new LoggerWarn().execute();
+const loggerWarn = new LoggerWarn(req, res, {}).execute();
 loggerWarn({
   ...
   msg: "Store some JSON object..."
@@ -87,6 +87,8 @@ const LoggerRequest = require('logger').LoggerRequest;
 app.use(ExpressXRequestId.middleware);
 
 // Request logger
+//  Since it's a middleware there's no need to pass the req and res objects
+//
 app.use(new LoggerRequest().execute());
 ...
 ```
@@ -115,8 +117,14 @@ You can pass options to the loggers at the moment of instantiation.
 
 ```javascript
 const LoggerDebug = require('logger').LoggerDebug;
-const LoggerDebug = new LoggerDebug({/*options object goes here*/}).execute();
+const LoggerDebug = new LoggerDebug(req, res, {/*options object goes here*/}).execute();
 ```
+
+| Option   | Description  |   Value   | Default |
+| ---------|--------------|-----------|---------|
+| color | Display color when transport way is console | boolean | false |
+
+
 
 Example: 
 
