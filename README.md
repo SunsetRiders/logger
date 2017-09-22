@@ -104,7 +104,8 @@ req.logger(type, data, config); // This will automatically insert/show the log
 Example:
 
 ```javascript
-req.logger('error', {
+req.logger('error', 
+{
   age: 18,
   name: 'Adam'
 }, 
