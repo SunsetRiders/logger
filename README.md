@@ -84,10 +84,10 @@ const LoggerRequest = require('logger').LoggerRequest;
 // DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
 // MODULE BEFORE THE LOGGER REQUEST
 // Set middleware express X-Request-Id
-app.use(ExpressXRequestId.middleware);!
+app.use(ExpressXRequestId.middleware);
 
 // Request logger
-app.use(new LoggerRequest().execute();
+app.use(new LoggerRequest().execute());
 ...
 ```
 
