@@ -2,6 +2,16 @@
 
 A module to handle winston loggers.
 
+## Project dependencies
+
+One important point to be mentioned is that as you scale you architecture to micro services it's very important to sign your request with an unique identifier. So every requested service will contain the ID making it trackable.
+
+To do that you **MUST PROPERLY** install this **REQUIRED** module:
+
+**express-x-request-id**
+
+https://github.com/SunsetRiders/express-x-request-id
+
 ## Logger type
 
 This implementation provides 5 logger types which are.
