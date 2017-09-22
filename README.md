@@ -14,7 +14,7 @@ https://github.com/SunsetRiders/express-x-request-id
 
 ## Logger types
 
-This implementation provides 4 logger types which are.
+This implementation provides 4 loggers types and 1 request middleware.
 
 **1. debug:** Use to log any type of data mostly used for checking the application/process cycle;
 
@@ -26,13 +26,33 @@ This implementation provides 4 logger types which are.
 
 **5. request:** A middleware that logs every incoming request
 
-### Using LoggerRequest
+
+
+### Middleware to bind logger to req object
+
+```javascript
+const ExpressXRequestId = require('express-x-request-id');
+const Logger            = require('logger');
+
+...
+// DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
+// MODULE BEFORE THE LOGGER REQUEST
+// Set middleware express X-Request-Id
+app.use(ExpressXRequestId.middleware);
+
+// Bind logger to req object
+this.app.use(Logger.middleware);
+...
+```
+
+### Using Request middleware
 
 Since it's a middleware should be added into your **app.js** file.
 
 ```javascript
 const ExpressXRequestId = require('express-x-request-id');
-const LoggerRequest = require('logger').LoggerRequest;
+const Logger            = require('logger');
+
 ...
 // DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
 // MODULE BEFORE THE LOGGER REQUEST
@@ -40,9 +60,8 @@ const LoggerRequest = require('logger').LoggerRequest;
 app.use(ExpressXRequestId.middleware);
 
 // Request logger
-//  Since it's a middleware there's no need to pass the req and res objects
-//
-app.use(new LoggerRequest().execute());
+// Since it's a middleware that don't require the req and res objects
+app.use(Logger.requestMiddleware({/*Config object*/}));
 ...
 ```
 
@@ -64,12 +83,33 @@ Puts the log inside a file.
 
 Send the log to log entries web service.
 
-## Options
+## Usage
 
-You can pass options to the loggers at the moment of instantiation.
+Since the middleware binds logger to req object it can be accessed with:
 
 ```javascript
-const LoggerDebug = require('logger').LoggerDebug;
+req.logger(type, data, config); // This will automatically insert/show the log
+```
+**1. type**
+
+Use one of the 4 logger type. (String)
+
+**2. data**
+
+The data you want to store in log. (Object or String)
+
+**2. config**
+
+Configuration object (Object)
+
+**IMPORTANT: If you want to log any type you must always use it from the req object described above** 
+
+## Configurations
+
+You can pass configuration to the logger at the moment of instantiation.
+
+```javascript
+const Logger = require('logger');
 const LoggerDebug = new LoggerDebug(req, res, {/*options object goes here*/}).execute();
 ```
 
