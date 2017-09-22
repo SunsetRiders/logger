@@ -11,9 +11,17 @@ class Index {
    * @param {Object} req Request object
    * @param {Object} res Respons object
    * @param {Function} next Next function
+   * @param {Object} config Configuration object
    */
-  static middleware(req, res, next) {
-    req.logger = (type, log, options) => {
+  static middleware(req, res, next, config) {
+    /**
+     * Binds logger to req object
+     * @param {String} type Type
+     * @param {Object} log Data object
+     * @param {Object} altConfig Alternative configuration
+     * @return {Function} logger function
+     */
+    req.logger = (type, log, altConfig) => {
       try {
         let logger = null;
         type = type.toLowerCase();
@@ -24,16 +32,16 @@ class Index {
         switch (type) {
           default:
           case 'debug':
-            logger = new LoggerDebug(req, res, options).execute(log);
+            logger = new LoggerDebug(req, res, config || altConfig).execute(log);
             break;
           case 'info':
-            logger = new LoggerInfo(req, res, options).execute(log);
+            logger = new LoggerInfo(req, res, config || altConfig).execute(log);
             break;
           case 'warn':
-            logger = new LoggerWarn(req, res, options).execute(log);
+            logger = new LoggerWarn(req, res, config || altConfig).execute(log);
             break;
           case 'error':
-            logger = new LoggerError(req, res, options).execute(log);
+            logger = new LoggerError(req, res, config || altConfig).execute(log);
             break;
         }
         return logger;
