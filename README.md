@@ -26,8 +26,6 @@ This implementation provides 4 loggers types and 1 request middleware.
 
 **5. request:** A middleware that logs every incoming request
 
-
-
 ### Middleware to bind logger to req object
 
 ```javascript
@@ -45,7 +43,7 @@ this.app.use(Logger.middleware);
 ...
 ```
 
-### Using Request middleware
+### Using request middleware
 
 Since it's a middleware should be added into your **app.js** file.
 
@@ -92,7 +90,7 @@ req.logger(type, data, config); // This will automatically insert/show the log
 ```
 **1. type**
 
-Use one of the 4 logger type. **(String)**
+Use one of the 4 loggers types. **(String)**
 
 **2. data**
 
@@ -102,7 +100,7 @@ The data you want to store in log. **(Object or String)**
 
 Configuration object. **(Object)**
 
-**IMPORTANT: If you want to log any type you must always use it from the req object described above** 
+**IMPORTANT: If you want to log any logger type you must always use it from the req object described above** 
 
 ## Configurations
 
@@ -115,15 +113,7 @@ const LoggerDebug = new LoggerDebug(req, res, {/*options object goes here*/}).ex
 
 | Option   | Description  |   Value   | Default |
 | ---------|--------------|-----------|---------|
-| color | Display color when transport way is console | boolean | false |
-
-
-
-Example: 
-
-## Usage
-
-It's pretty easy
-
-
-
+| color | Display color when transport way is console. | boolean | false |
+| logentriesToken | Log entries token to access the web service. | string | '' |
+| logPath | Log path to save the log files. | string | './log' |
+| transports | Transports ways to insert/show the logs. | array | ['console'] |
