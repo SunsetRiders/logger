@@ -54,9 +54,12 @@ const Logger            = require('logger');
 app.use(ExpressXRequestId.middleware);
 
 // Bind logger to req object
-this.app.use(Logger.middleware);
+app.use((req, res, next) => {
+  Logger.middleware(req, res, next, {/*Config object*/});
+});
 ...
 ```
+
 ### Using request middleware
 
 Since it's a middleware should be added into your **app.js** file.
@@ -99,7 +102,7 @@ Send the log to log entries web service.
 Since the middleware binds logger to req object it can be executed by calling:
 
 ```javascript
-req.logger(type, data, config); // This will automatically insert/show the log
+req.logger(type, data, altconfig); // This will automatically insert/show the log
 ```
 Example:
 
@@ -123,15 +126,17 @@ Use one of the 4 loggers types. **(String)**
 
 The data you want to store in log. **(Object or String)**
 
-**3. config**
+**3. altconfig**
 
-Configuration object. **(Object)**
+Alternative configuration object. **(Object)**
 
 **IMPORTANT: If you want to log any logger type you must always use it from the req object described above** 
 
 ## Configurations
 
-You can pass configuration to the logger at the moment of instantiation.
+You can pass configuration to the logger at the moment of instantiation or whetever you call the method **req.logger(type, data, {/*Config object*/});** passing as third parameter.
+
+**IMPORTANT: If you pass the object in the req.logger the alternative configuration will work only for that call, if you do not pass then the method will use the instantiation configuration** 
 
 | Option   | Description  |   Value   | Default |
 | ---------|--------------|-----------|---------|
