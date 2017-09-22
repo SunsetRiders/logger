@@ -106,14 +106,9 @@ Configuration object. **(Object)**
 
 You can pass configuration to the logger at the moment of instantiation.
 
-```javascript
-const Logger = require('logger');
-const LoggerDebug = new LoggerDebug(req, res, {/*options object goes here*/}).execute();
-```
-
 | Option   | Description  |   Value   | Default |
 | ---------|--------------|-----------|---------|
 | color | Display color when transport way is console. | boolean | false |
 | logentriesToken | Log entries token to access the web service. | string | '' |
 | logPath | Log path to save the log files. | string | './log' |
-| transports | Transports ways to insert/show the logs. | array | ['console'] |
+| transports | Transports ways to insert/show the logs. ['console', 'file', 'logentries'] | array | ['console'] |
