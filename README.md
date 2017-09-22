@@ -12,6 +12,21 @@ To do that you **MUST PROPERLY** install this **REQUIRED** module:
 
 https://github.com/SunsetRiders/express-x-request-id
 
+## Adding the module to the project
+
+Add this into your **package.json** file.
+
+**IMPORTANT: This is not a npm module but will work the same way, you must add manualy because the base code is here in GitHub.**
+
+```javascript
+"dependencies": {
+  ...
+  "logger": "git@github.com:SunsetRiders/logger.git"
+}
+ ```
+ 
+ If you use **npm install** will be installed like a npm module direct to the **node_modules** folder.
+
 ## Logger types
 
 This implementation provides 4 loggers types and 1 request middleware.
