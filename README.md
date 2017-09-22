@@ -57,7 +57,6 @@ app.use(ExpressXRequestId.middleware);
 this.app.use(Logger.middleware);
 ...
 ```
-
 ### Using request middleware
 
 Since it's a middleware should be added into your **app.js** file.
@@ -77,7 +76,6 @@ app.use(ExpressXRequestId.middleware);
 app.use(Logger.requestMiddleware({/*Config object*/}));
 ...
 ```
-
 ## Transport ways
 
 The transport is basically ways to show/save the logs.
