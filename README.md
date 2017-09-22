@@ -14,64 +14,17 @@ https://github.com/SunsetRiders/express-x-request-id
 
 ## Logger types
 
-This implementation provides 5 logger types which are.
+This implementation provides 4 logger types which are.
 
-**1. LoggerDebug:** Use to log any type of data mostly used for checking the application/process cycle;
+**1. debug:** Use to log any type of data mostly used for checking the application/process cycle;
 
-### Using LoggerDebug
+**2. error:** Use to log error objects/messages;
 
-```javascript
-const LoggerDebug = require('logger').LoggerDebug;
-const loggerDebug = new LoggerDebug(req, res, {}).execute();
-loggerDebug({
-  ...
-  msg: "Store some JSON object..."
-  ...
-});
-```
+**3. info:** Use to log any type of data that is a regular information.
 
-**2. LoggerError:** Use to log error objects/messages;
+**4. warn:** Use to log any type of data that is a warning.
 
-### Using LoggerError
-
-```javascript
-const LoggerError = require('logger').LoggerError;
-const loggerError = new LoggerError(req, res, {}).execute();
-loggerError({
-  ...
-  msg: "Store some JSON object..."
-  ...
-});
-```
-
-**3. LoggerInfo:** Use to log any type of data that is a regular information.
-
-### Using LoggerInfo
-
-```javascript
-const LoggerInfo = require('logger').LoggerInfo;
-const loggerInfo = new LoggerInfo(req, res, {}).execute();
-loggerInfo({
-  ...
-  msg: "Store some JSON object..."
-  ...
-});
-```
-
-**4. LoggerWarn:** Use to log any type of data that is a warning.
-
-### Using LoggerWarn
-
-```javascript
-const LoggerWarn = require('logger').LoggerWarn;
-const loggerWarn = new LoggerWarn(req, res, {}).execute();
-loggerWarn({
-  ...
-  msg: "Store some JSON object..."
-  ...
-});
-```
-**5. LoggerRequest:** A middleware that logs every incoming request
+**5. request:** A middleware that logs every incoming request
 
 ### Using LoggerRequest
 
