@@ -16,11 +16,12 @@ class Index {
     req.logger = (type, log, options) => {
       try {
         let logger = null;
+        type = type.toLowerCase();
         // Check if type is available
         if (['debug', 'info', 'warn', 'error'].indexOf(type) === -1) {
           throw new Error("Logger type not available, please use one of: ['debug', 'info', 'warn', 'error']");
         }
-        switch (type.toLowerCase()) {
+        switch (type) {
           default:
           case 'debug':
             logger = new LoggerDebug(req, res, options).execute(log);
