@@ -12,7 +12,7 @@ To do that you **MUST PROPERLY** install this **REQUIRED** module:
 
 https://github.com/SunsetRiders/express-x-request-id
 
-## Logger type
+## Logger types
 
 This implementation provides 5 logger types which are.
 
@@ -78,19 +78,47 @@ loggerWarn({
 Since it's a middleware should be added into your **app.js** file.
 
 ```javascript
+const ExpressXRequestId = require('express-x-request-id');
 const LoggerRequest = require('logger').LoggerRequest;
+...
+// DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
+// MODULE BEFORE THE LOGGER REQUEST
+// Set middleware express X-Request-Id
+app.use(ExpressXRequestId.middleware);!
+
 // Request logger
 app.use(new LoggerRequest().execute();
-});
+...
 ```
 
-There're 3 avalable transport ways:
+## Transport ways
 
-**1. console:** Displays the log direct in the terminal.
+The transport is basically ways to show/save the logs.
 
-**2. file:** Puts the log inside a file.
+There're 3 available transport ways:
 
-**3. logentries:** Send the log to log entries web service.
+**1. console** 
+
+Displays the log direct in the terminal.
+
+**2. file**
+
+Puts the log inside a file.
+
+**3. logentries**
+
+Send the log to log entries web service.
+
+## Options
+
+You can pass options to the loggers at the moment of instantiation.
+
+```javascript
+const LoggerDebug = require('logger').LoggerDebug;
+const LoggerDebug = new LoggerDebug({/*options object goes here*/}).execute();
+```
+
+Example: 
 
 ## Usage
 
