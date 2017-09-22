@@ -101,6 +101,19 @@ Since the middleware binds logger to req object it can be executed by calling:
 ```javascript
 req.logger(type, data, config); // This will automatically insert/show the log
 ```
+Example:
+
+```javascript
+req.logger('error', {
+  age: 18,
+  name: 'Adam'
+}, 
+{
+ tranports: ['file', 'console'],
+ logPath: './files/log'
+}); 
+```
+
 **1. type**
 
 Use one of the 4 loggers types. **(String)**
