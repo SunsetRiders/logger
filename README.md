@@ -138,4 +138,4 @@ You can pass configuration to the logger at the moment of instantiation.
 | color | Display color when transport way is console. | boolean | false |
 | logentriesToken | Log entries token to access the web service. | string | '' |
 | logPath | Log path to save the log files. | string | './log' |
-| transports | Transports ways to insert/show the logs. ['console', 'file', 'logentries'] | array | ['console'] |
+| transports | Transport ways to insert/show the logs. ['console', 'file', 'logentries'] | array | ['console'] |
