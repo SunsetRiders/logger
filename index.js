@@ -1,66 +1,54 @@
-const LoggerDebug   = require("./lib/logger-debug");
-const LoggerError   = require("./lib/logger-error");
-const LoggerRequest = require("./lib/logger-request");
-const LoggerInfo    = require("./lib/logger-info");
-const LoggerWarn    = require("./lib/logger-warn");
+const Toolkit = require('./lib/util/toolkit');
+const Logger  = require('./lib/logger');
+const LoggerRequest = require('./lib/logger-request');
 
+/**
+ * Base module class
+ * @example
+ * const app = require('express')();
+ * const Logger = require('logger');
+ * const config = require('getconfig');
+ *
+ * app.use(Logger.injectLogger(config.logs));
+ * app.use(Logger.requestLogger(config.logs));
+ *
+ * app.get('/', (req, res) => res.send('ok'));
+ */
 class Index {
-
   /**
-   * Middleware for logger
-   * @param {Object} req Request object
-   * @param {Object} res Respons object
-   * @param {Function} next Next function
+   * Middleware for injecting logger into request object
    * @param {Object} config Configuration object
+   * @return {Function} express middleware function
    */
-  static middleware(req, res, next, config) {
+  static injectLogger(config) {
     /**
-     * Binds logger to req object
-     * @param {String} type Type
-     * @param {Object} log Data object
-     * @param {Object} altConfig Alternative configuration
-     * @return {Function} logger function
+     * Binds a new logger to each request
+     *
+     * @param {Object} req Request object
+     * @param {Object} res Respons object
+     * @param {Function} next Next function
      */
-    req.logger = (type, log, altConfig) => {
-      try {
-        let logger = null;
-        type = type.toLowerCase();
-        // Check if type is available
-        if (['debug', 'info', 'warn', 'error'].indexOf(type) === -1) {
-          throw new Error("Logger type not available, please use one of: ['debug', 'info', 'warn', 'error']");
-        }
-        switch (type) {
-          default:
-          case 'debug':
-            logger = new LoggerDebug(req, res, config || altConfig).execute(log);
-            break;
-          case 'info':
-            logger = new LoggerInfo(req, res, config || altConfig).execute(log);
-            break;
-          case 'warn':
-            logger = new LoggerWarn(req, res, config || altConfig).execute(log);
-            break;
-          case 'error':
-            logger = new LoggerError(req, res, config || altConfig).execute(log);
-            break;
-        }
-        return logger;
-      } catch (err) {
-        throw err;
-      }
+    return function loggerInjectorMiddleware(req, res, next) {
+      // Let's keep this flexible, we may want to add more metadata in the future
+      const metadata = {
+        xRequestId: req.get('x-request-id'),
+        clientIp: Toolkit.getIp(req)
+      };
+
+      req.logger = new Logger(config, metadata);
+      next();
     };
-    next();
   }
 
   /**
    * Middleware for request logging
-   * @param {Object} options Options object
+   *
+   * @param {Object} config Options object
    * @return {Function} Execute function
    */
-  static requestMiddleware(options) {
-    return new LoggerRequest(options).execute;
+  static injectRequestLogger(config) {
+    return (new LoggerRequest()).middleware(config);
   }
-
 }
 
 module.exports = Index;
