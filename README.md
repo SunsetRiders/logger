@@ -54,7 +54,7 @@ const Logger            = require('logger');
 
 ...
 // DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
-// MODULE BEFORE THE LOGGER REQUEST
+// MODULE BEFORE THE LOGGER MIDDLEWARES
 // Set request middleware express
 app.use(ExpressXRequestId.requestMiddleware);
 
@@ -76,7 +76,7 @@ const Logger            = require('logger');
 
 ...
 // DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
-// MODULE BEFORE THE LOGGER REQUEST
+// MODULE BEFORE THE LOGGER MIDDLEWARES
 // Set request middleware express
 app.use(ExpressXRequestId.requestMiddleware);
 
