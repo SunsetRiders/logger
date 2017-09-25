@@ -27,6 +27,11 @@ Add this into your **package.json** file.
  
  If you use **npm install** will be installed like a npm module direct to the **node_modules** folder.
 
+You can also install with terminal.
+
+```
+$ npm i --save git+https://github.com/SunsetRiders/logger.git
+```
 ## Logger types
 
 This implementation provides 4 loggers types and 1 request middleware.
@@ -49,14 +54,15 @@ const Logger            = require('logger');
 
 ...
 // DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
-// MODULE BEFORE THE LOGGER REQUEST
-// Set middleware express X-Request-Id
-app.use(ExpressXRequestId.middleware);
+// MODULE BEFORE THE LOGGER MIDDLEWARES
+// Set request middleware express
+app.use(ExpressXRequestId.requestMiddleware);
+
+// Set response middleware express
+app.use(ExpressXRequestId.responseMiddleware);
 
 // Bind logger to req object
-app.use((req, res, next) => {
-  Logger.middleware(req, res, next, {/*Config object*/});
-});
+app.use(Logger.injectLogger(config.logs));
 ...
 ```
 
@@ -70,15 +76,18 @@ const Logger            = require('logger');
 
 ...
 // DON'T FORGET TO ADD THE EXPRESS-X-REQUEST-ID
-// MODULE BEFORE THE LOGGER REQUEST
-// Set middleware express X-Request-Id
-app.use(ExpressXRequestId.middleware);
+// MODULE BEFORE THE LOGGER MIDDLEWARES
+// Set request middleware express
+app.use(ExpressXRequestId.requestMiddleware);
+
+// Set response middleware express
+app.use(ExpressXRequestId.responseMiddleware);
 
 // Request logger
-// Since it's a middleware that don't require the req and res objects
-app.use(Logger.requestMiddleware({/*Config object*/}));
+app.use(Logger.injectRequestLogger());
 ...
 ```
+
 ## Transport ways
 
 The transport is basically ways to show/save the logs.
@@ -102,20 +111,18 @@ Send the log to log entries web service.
 Since the middleware binds logger to req object it can be executed by calling:
 
 ```javascript
-req.logger(type, data, altconfig); // This will automatically insert/show the log
+req.logger[type](data); // This will automatically insert/show the log
 ```
 Example:
 
 ```javascript
-req.logger('error', 
-{
-  age: 18,
-  name: 'Adam'
-}, 
-{
- tranports: ['file', 'console'],
- logPath: './files/log'
-}); 
+app.use('/', (req, res) => {
+  req.logger.error({
+    age: 18,
+    name: 'Adam'
+  }); 
+);
+
 ```
 
 **1. type** REQUIRED
@@ -126,21 +133,16 @@ Use one of the 4 loggers types. **(String)**
 
 The data you want to store in log. **(Object or String)**
 
-**3. altconfig** NOT REQUIRED
-
-Alternative configuration object. **(Object)**
-
 **IMPORTANT: If you want to log any logger type you must always use it from the req object described above** 
 
 ## Configurations
 
-You can pass configuration to the logger at the moment of instantiation or whetever you call the method **req.logger(type, data, {/*Config object*/});** passing as third parameter.
+You must pass configuration to the logger at the moment of instantiation.
 
-**IMPORTANT: If you pass the object in the req.logger the alternative configuration will work only for that call, if you do not pass then the method will use the instantiation configuration** 
 
 | Option   | Description  |   Value   | Default |
 | ---------|--------------|-----------|---------|
-| color | Display color when transport way is console. | boolean | false |
+| level | Default level | string | 'info' |
 | logentriesToken | Log entries token to access the web service. | string | '' |
 | logPath | Log path to save the log files. | string | './log' |
 | transports | Transport ways to insert/show the logs. ['console', 'file', 'logentries'] | array | ['console'] |
