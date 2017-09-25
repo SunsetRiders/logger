@@ -31,10 +31,9 @@ class Index {
     return function loggerInjectorMiddleware(req, res, next) {
       // Let's keep this flexible, we may want to add more metadata in the future
       const metadata = {
-        xRequestId: req.get('x-request-id'),
+        xRequestId: req.xRequestId || null,
         clientIp: Toolkit.getIp(req)
       };
-
       req.logger = new Logger(config, metadata);
       next();
     };

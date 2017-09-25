@@ -1,11 +1,19 @@
 const app = require('express')();
 const Logger = require('../index');
+const ExpressXRequestId = require('express-x-request-id');
+
 const config = {
   logs: {
     logentriesToken: process.env.LOGENTRIES_TOKEN,
-    transports: ['console', 'logentries']
+    transports: ['console']
   }
 };
+
+// Set request middleware express
+app.use(ExpressXRequestId.requestMiddleware);
+
+// Set response middleware express
+app.use(ExpressXRequestId.responseMiddleware);
 
 app.use(Logger.injectLogger(config.logs));
 app.use(Logger.injectRequestLogger());
@@ -19,7 +27,8 @@ app.get('/error', (req, res) => {
   req.logger.debug('will throw');
   req.logger.warn('will throw');
   req.logger.error('will throw');
-  throw new Error('Test');
+  req.logger.verbose('will throw');
+  res.end("ok");
 });
 
 app.listen(3000);
