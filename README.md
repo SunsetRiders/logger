@@ -29,7 +29,7 @@ Add this into your **package.json** file.
 
 You can also install with terminal.
 
-```javascript
+```
 $ npm i --save git+https://github.com/SunsetRiders/logger.git
 ```
 ## Logger types
@@ -116,10 +116,13 @@ req.logger[type](data); // This will automatically insert/show the log
 Example:
 
 ```javascript
-req.logger.error({
-  age: 18,
-  name: 'Adam'
-}); 
+app.use('/', (req, res) => {
+  req.logger.error({
+    age: 18,
+    name: 'Adam'
+  }); 
+);
+
 ```
 
 **1. type** REQUIRED
