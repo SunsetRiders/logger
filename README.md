@@ -34,7 +34,7 @@ $ npm i --save git+https://github.com/SunsetRiders/logger.git
 ```
 ## Logger types
 
-This implementation provides 4 loggers types and 1 request middleware.
+This implementation provides 5 loggers types and 1 request middleware.
 
 **1. debug:** Use to log any type of data mostly used for checking the application/process cycle;
 
@@ -44,7 +44,9 @@ This implementation provides 4 loggers types and 1 request middleware.
 
 **4. warn:** Use to log any type of data that is a warning.
 
-**5. request:** A middleware that logs every incoming request
+**5. verbose:** Use to log records bigger than the usual logging mode. (Verbose means "using more words than necessary".) Verbose logging options are usually enabled specifically for troubleshooting because they create large log files and can slow down performance.
+
+**6. request:** A middleware that logs every incoming request
 
 ### Middleware to bind logger to req object
 
@@ -142,6 +144,7 @@ You must pass configuration to the logger at the moment of instantiation.
 
 | Option   | Description  |   Value   | Default |
 | ---------|--------------|-----------|---------|
+| filename | Default log file name | string | 'application' |
 | level | Default level | string | 'info' |
 | logentriesToken | Log entries token to access the web service. | string | '' |
 | logPath | Log path to save the log files. | string | './log' |

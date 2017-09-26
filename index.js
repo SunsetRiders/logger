@@ -1,4 +1,3 @@
-const Toolkit = require('./lib/util/toolkit');
 const Logger  = require('./lib/logger');
 const LoggerRequest = require('./lib/logger-request');
 
@@ -31,10 +30,9 @@ class Index {
     return function loggerInjectorMiddleware(req, res, next) {
       // Let's keep this flexible, we may want to add more metadata in the future
       const metadata = {
-        xRequestId: req.xRequestId || null,
-        clientIp: Toolkit.getIp(req)
+        xRequestId: req.xRequestId || null
       };
-      req.logger = Index.getLogger(config, metadata);
+      req.logger = Index.newInstance(config, metadata);
       next();
     };
   }
@@ -45,7 +43,7 @@ class Index {
    * @param {Object} metadata Metadata object
    * @return {Object} logger object
    */
-  static getLogger(config, metadata) {
+  static newInstance(config, metadata) {
     return new Logger(config, metadata);
   }
 
