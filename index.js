@@ -34,17 +34,19 @@ class Index {
         xRequestId: req.xRequestId || null,
         clientIp: Toolkit.getIp(req)
       };
-      req.logger = new Logger(config, metadata);
+      req.logger = Index.getLogger(config, metadata);
       next();
     };
   }
 
   /**
    * Get new logger isntance
+   * @param {Object} config Configuration object
+   * @param {Object} metadata Metadata object
    * @return {Object} logger object
    */
-  static getLogger(config) {
-    return new Logger(config);
+  static getLogger(config, metadata) {
+    return new Logger(config, metadata);
   }
 
   /**
