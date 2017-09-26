@@ -40,6 +40,14 @@ class Index {
   }
 
   /**
+   * Get new logger isntance
+   * @return {Object} logger object
+   */
+  static getLogger(config) {
+    return new Logger(config);
+  }
+
+  /**
    * Middleware for request logging
    *
    * @param {Object} config Options object
