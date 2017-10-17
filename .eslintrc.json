@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "sunset-nodejs"
-  ]
+  "extends": "sunset-nodejs"
 }

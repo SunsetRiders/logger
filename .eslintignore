@@ -1,0 +1,10 @@
+app/client/*
+*/dist/*
+Dockerfil*
+docker-compose.yml
+gulpfile.coffee
+coverage/**
+swagger.*
+README.md
+package.json
+client/src/lib/*
