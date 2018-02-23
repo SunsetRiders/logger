@@ -23,12 +23,12 @@ app.get('/', (req, res) => res.send('ok'));
 app.get('/404', (req, res) => res.status(404).send('ok'));
 
 app.get('/error', (req, res) => {
- /* req.logger.info('will throw');
-  req.logger.log('will throw');*/
-  req.logger.verbose('will throw');
- /* req.logger.warn('will throw');
-  req.logger.error('will throw');
-  req.logger.verbose('will throw');*/
+  req.logger.error('Hello World!', 'wow', 'lalala');
+  req.logger.error(1000);
+  req.logger.error(new Error('Custom Error'));
+  req.logger.error({custom: 'error'});
+  req.logger.error(['aaa', 'bbb', 'ccc']);
+
   res.end('ok from error');
 });
 
