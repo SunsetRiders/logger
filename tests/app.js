@@ -28,6 +28,10 @@ app.get('/error', (req, res) => {
   req.logger.error(new Error('Custom Error'));
   req.logger.error({custom: 'error'});
   req.logger.error(['aaa', 'bbb', 'ccc']);
+  
+  const filterableObject = { password: "password", pass: "pass" }
+  const filterableObject2 = { password: "password", banana: "banana" }
+  req.logger.error([filterableObject, filterableObject2]);
 
   res.end('ok from error');
 });
