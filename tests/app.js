@@ -28,12 +28,18 @@ app.get('/error', (req, res) => {
   req.logger.error(new Error('Custom Error'));
   req.logger.error({custom: 'error'});
   req.logger.error(['aaa', 'bbb', 'ccc']);
-  
-  const filterableObject = { password: "password", pass: "pass" }
-  const filterableObject2 = { password: "password", banana: "banana" }
+  const filterableObject = {password: 'password', pass: 'pass'};
+  const filterableObject2 = {password: 'password', banana: 'banana'};
   req.logger.error([filterableObject, filterableObject2]);
-
+  const a = {password: 'aaa'};
+  const b = {a: null, b: undefined, c: {password: 'ABC', c2: {password: 'CBA'}}, d: 'ABC', e: 1};
+  const c = [a, b, b, null, undefined, [null, undefined, a, b, b]];
+  req.logger.error(a);
+  req.logger.error(b);
+  req.logger.error(c);
   res.end('ok from error');
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('Listening on 3000');
+});
