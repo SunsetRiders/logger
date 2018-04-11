@@ -23,14 +23,14 @@ app.get('/', (req, res) => res.send('ok'));
 app.get('/404', (req, res) => res.status(404).send('ok'));
 
 app.get('/error', (req, res) => {
-  /* req.logger.error('Hello World!', 'wow', 'lalala');
+  req.logger.error('Hello World!', 'wow', 'lalala');
   req.logger.error(1000);
   req.logger.error(new Error('Custom Error'));
   req.logger.error({custom: 'error'});
   req.logger.error(['aaa', 'bbb', 'ccc']);
   const filterableObject = {password: 'password', pass: 'pass'};
   const filterableObject2 = {password: 'password', banana: 'banana'};
-  req.logger.error([filterableObject, filterableObject2]);*/
+  req.logger.error([filterableObject, filterableObject2]);
   const a = {password: 'aaa'};
   const b = {a: null, b: undefined, c: {password: 'ABC', c2: {password: 'CBA'}}, d: 'ABC', e: 1};
   const c = [a, b, b, null, undefined, [null, undefined, a, b, b]];
