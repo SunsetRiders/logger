@@ -31,12 +31,31 @@ app.get('/error', (req, res) => {
   const filterableObject = {password: 'password', pass: 'pass'};
   const filterableObject2 = {password: 'password', banana: 'banana'};
   req.logger.error([filterableObject, filterableObject2]);
-  const a = {password: 'aaa'};
-  const b = {a: null, b: undefined, c: {password: 'ABC', c2: {password: 'CBA'}}, d: 'ABC', e: 1};
-  const c = [a, b, b, null, undefined, [null, undefined, a, b, b]];
+  const a = {
+    password: 'aaa',
+    a: {
+      b: {
+        c: {
+          password: 'aaa',
+          d: [{
+            password: 'aaa'
+          }],
+          e: {
+            password: 'aaa',
+            f: [null, undefined, {}, [], {
+              password: 'aaa',
+              g: 'lol'
+            }]
+          }
+        }
+      },
+      password: 'aaa'
+    }
+  };
+  let b = {};
+  b.a = a;
+  a.bb = b;
   req.logger.error(a);
-  req.logger.error(b);
-  req.logger.error(c);
 
   //circular object
   let circ1 = {password:"password"};
@@ -49,7 +68,7 @@ app.get('/error', (req, res) => {
   Object.freeze(frozen);
   req.logger.error(frozen);
   
-  res.end('ok from error');
+  res.end('Done');
 });
 
 app.listen(3000, () => {
