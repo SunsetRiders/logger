@@ -37,6 +37,18 @@ app.get('/error', (req, res) => {
   req.logger.error(a);
   req.logger.error(b);
   req.logger.error(c);
+
+  //circular object
+  let circ1 = {password:"password"};
+  let circ2 = {circ1: circ1};
+  circ1.circ2 = circ2;
+  req.logger.error(circ1);
+
+  //frozen object
+  let frozen = {a:{password:"Let It Go"}};
+  Object.freeze(frozen);
+  req.logger.error(frozen);
+  
   res.end('ok from error');
 });
 
